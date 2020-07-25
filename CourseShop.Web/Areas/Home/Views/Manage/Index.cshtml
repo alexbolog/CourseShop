@@ -1,0 +1,35 @@
+﻿@model CourseShop.Core.Entities.Course
+
+    <div class="container">
+        <form method="post" action="Manage/AddCourse">
+            <div class="row">
+                <div class="col s3">
+                    Course Name
+                </div>
+                <div class="col s9">
+                    <input name="Name" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    Course Description
+                </div>
+                <div class="col s9">
+                    <input name="Description" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    Course Price
+                </div>
+                <div class="col s9">
+                    <input name="Price" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3 offset-s6">
+                    <input type="submit" />
+                </div>
+            </div>
+        </form>
+    </div>

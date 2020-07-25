@@ -1,0 +1,32 @@
+﻿@model CourseShop.Core.Business.ViewModels.CourseIndexViewModel
+
+    <div class="container">
+        @if (Model.Courses.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <td>@course.Name</td>
+                            <td>@course.Description</td>
+                            <td>@course.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="row">
+                <p>No courses available yet!</p>
+            </div>
+        }
+    </div>

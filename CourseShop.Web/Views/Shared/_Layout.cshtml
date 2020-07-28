@@ -13,14 +13,28 @@
 <body>
     <nav>
         <div class="nav-wrapper cyan darken-4">
-            <a href="/Home" class="brand-logo">Course Shop</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/Home/Manage">Add Course</a></li>
-            </ul>
+            <a href="/Home" class="brand-logo">Login</a>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/Identity/Account/Logout">Logout</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/Home/Manage">Add Courses</a></li>
+                </ul>
+            }
+            else
+            {
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/Identity/Account/Login">Login</a></li>
+                </ul>
+            }
         </div>
     </nav>
     <div>
         @RenderBody()
+        @RenderSection("scripts", required: false);
     </div>
 </body>
 </html>

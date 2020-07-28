@@ -1,4 +1,5 @@
 ﻿using CourseShop.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace CourseShop.Core.DAL
 {
-    public class CourseContext : DbContext
+    public class CourseContext : IdentityDbContext<ApplicationUser>
     {
         public CourseContext(DbContextOptions<CourseContext> options)
             : base(options)

@@ -38,12 +38,13 @@ namespace CourseShop.Core.DAL.Repositories
 
         public Course GetCourseById(int id)
         {
-            throw new NotImplementedException();
+            return _courseContext.Courses.FirstOrDefault(c => c.Id == id);
         }
 
         public void RemoveCourse(Course entity)
         {
-            throw new NotImplementedException();
+            _courseContext.Remove(entity);
+            _courseContext.SaveChanges();
         }
     }
 }

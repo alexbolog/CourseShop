@@ -1,0 +1,47 @@
+﻿@model CourseShop.Core.Business.ViewModels.CourseIndexViewModel
+@{
+    ViewBag.Title = "Manage Courses";
+}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model.Courses)
+            {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Description</td>
+                <td>@course.Price</td>
+                <td>
+                    <a href="Courses/Edit/@course.Id">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </td>
+                <td>
+                    <a href="Courses/Delete/@course.Id">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </td>
+            </tr>
+            }
+        <tr>
+            <td>
+                <a href="Courses/Add/">
+                    <i class="material-icons">add</i> Add new course
+                </a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>

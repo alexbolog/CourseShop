@@ -1,7 +1,7 @@
 ﻿@model CourseShop.Core.Business.ViewModels.CourseIndexViewModel
 
     <div class="container">
-        @if (Model.Courses.Any())
+        @if (Model.Courses.Count() > 0)
         {
             <table>
                 <thead>

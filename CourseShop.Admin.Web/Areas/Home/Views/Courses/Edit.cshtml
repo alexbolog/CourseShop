@@ -1,0 +1,33 @@
+﻿@model CourseShop.Core.Entities.Course
+
+    <h3>Edit Course @Model.Name</h3>
+    <form method="post" action="Edit" id="edit-course-form">
+        <div class="row" style="display:none">
+            <div class="col s9">
+                <input name="Id" type="text" value="@Model.Id" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <input name="Name" type="text" value="@Model.Name" />
+                <label for="Name">Course name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <input name="Description" type="text" value="@Model.Description"/>
+                <label for="Description">Course Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <input name="Price" type="text" value="@Model.Price"/>
+                <label for="Price">Price</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3 offset-s6">
+                <a class="waves-effect waves-light btn" href="javascript:;" onclick="document.getElementById('edit-course-form').submit();">Submit<i class="material-icons right"></i></a>
+            </div>
+        </div>
+    </form>

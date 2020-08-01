@@ -10,6 +10,8 @@ namespace CourseShop.Core.Business.Services
     {
         IEnumerable<Course> GetAllCourses();
         void AddOrUpdateCourse(Course course);
+        Course GetCourseById(int courseId);
+        void RemoveById(int id);
     }
     public class CourseService : ICourseService
     {
@@ -28,6 +30,17 @@ namespace CourseShop.Core.Business.Services
         public IEnumerable<Course> GetAllCourses()
         {
             return _courseRepository.GetAllCourses();
+        }
+
+        public Course GetCourseById(int courseId)
+        {
+            return _courseRepository.GetCourseById(courseId);
+        }
+
+        public void RemoveById(int id)
+        {
+            var course = GetCourseById(id);
+            _courseRepository.RemoveCourse(course);
         }
     }
 }

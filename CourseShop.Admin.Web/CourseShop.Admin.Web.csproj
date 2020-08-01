@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CourseShop.Admin.Core.Entities\CourseShop.Admin.Core.Entities.csproj" />
+    <ProjectReference Include="..\CourseShop.Core.DAL\CourseShop.Core.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

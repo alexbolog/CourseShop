@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Core.DAL", "Cour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Core.Business", "CourseShop.Core.Business\CourseShop.Core.Business.csproj", "{B9328FB1-8BE9-424F-BAD4-45644CF1F1BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Core.Entities", "CourseShop.Core.Entities\CourseShop.Core.Entities.csproj", "{25A795E8-53F2-4E05-A060-A3FD15727F02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Core.Entities", "CourseShop.Core.Entities\CourseShop.Core.Entities.csproj", "{25A795E8-53F2-4E05-A060-A3FD15727F02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{995AAF46-13D5-4A37-8CDF-39CB71354F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Admin.Web", "CourseShop.Admin.Web\CourseShop.Admin.Web.csproj", "{D2C6F054-3210-49AF-9BA5-E8964CE98C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Admin.Core.Entities", "CourseShop.Admin.Core.Entities\CourseShop.Admin.Core.Entities.csproj", "{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +39,21 @@ Global
 		{25A795E8-53F2-4E05-A060-A3FD15727F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25A795E8-53F2-4E05-A060-A3FD15727F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25A795E8-53F2-4E05-A060-A3FD15727F02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C6F054-3210-49AF-9BA5-E8964CE98C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C6F054-3210-49AF-9BA5-E8964CE98C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C6F054-3210-49AF-9BA5-E8964CE98C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C6F054-3210-49AF-9BA5-E8964CE98C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D2C6F054-3210-49AF-9BA5-E8964CE98C23} = {995AAF46-13D5-4A37-8CDF-39CB71354F67}
+		{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123} = {995AAF46-13D5-4A37-8CDF-39CB71354F67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {101E773E-2750-4C6F-B5D2-3B29F009C6EC}

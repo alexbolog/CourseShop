@@ -23,15 +23,9 @@ namespace CourseShop.Web.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                await _signInManager.SignOutAsync();
-                _logger.LogInformation("User logged out.");
-                return RedirectToPage();
-            }
-            return RedirectToPage("Home");            
+            return Page();            
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
@@ -46,6 +40,17 @@ namespace CourseShop.Web.Areas.Identity.Pages.Account
             {
                 return RedirectToPage();
             }
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await _signInManager.SignOutAsync();
+                _logger.LogInformation("User logged out.");
+                return RedirectToPage();
+            }
+            return RedirectToPage("Logout");
         }
     }
 }

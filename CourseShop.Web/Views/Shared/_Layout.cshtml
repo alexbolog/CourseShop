@@ -13,12 +13,16 @@
 <body>
     <nav>
         <div class="nav-wrapper cyan darken-4">
-            <a href="/Home" class="brand-logo">Login</a>
+            <a href="/Home" class="brand-logo">Home</a>
 
             @if (User.Identity.IsAuthenticated)
             {
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/Identity/Account/Logout">Logout</a></li>
+                    <li>
+                        <form id="logout-form" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                            <a href="javascript:;" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                        </form>
+                    </li>
                 </ul>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/Home/Manage">Add Courses</a></li>
@@ -33,8 +37,10 @@
         </div>
     </nav>
     <div>
-        @RenderBody()
-        @RenderSection("scripts", required: false);
+        <div class="container">
+            @RenderBody()
+        </div>
+        @RenderSection("scripts", required: false)
     </div>
 </body>
 </html>

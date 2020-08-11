@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CourseShop.Core.Business.Services;
+﻿using CourseShop.Core.Business.Services;
 using CourseShop.Core.Business.ViewModels;
 using CourseShop.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -30,19 +26,11 @@ namespace CourseShop.Web.Areas.Home.Controllers
             return View(viewModel);
         }
 
-        
-        [HttpGet]
-        public IActionResult Manage()
+        public IActionResult Search(string tags) // tag1|tag2|tag3
         {
-            return View();
-        }
-
-        [Authorize(Roles = "administrator")]
-        [HttpPost]
-        public IActionResult AddCourse(Course course)
-        {
-            _courseService.AddOrUpdateCourse(course);
-            return RedirectToAction("Index", "Home");
+            var splittedTags = tags.Split('|', System.StringSplitOptions.RemoveEmptyEntries);
+            var courses = _courseService.GetCoursesByTags(splittedTags);
+            return View(new CourseIndexViewModel { Courses = courses });
         }
     }
 }

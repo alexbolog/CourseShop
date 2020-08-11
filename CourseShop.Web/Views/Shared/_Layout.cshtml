@@ -34,6 +34,9 @@
                     <li><a href="/Identity/Account/Login">Login</a></li>
                 </ul>
             }
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/Home/Courses">Courses</a></li>
+            </ul>
         </div>
     </nav>
     <div>
@@ -41,6 +44,18 @@
             @RenderBody()
         </div>
         @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                var elems = document.querySelectorAll('.carousel');
+                var instances = M.Carousel.init(elems, options);
+            });
+
+            // Or with jQuery
+
+            $(document).ready(function () {
+                $('.carousel').carousel();
+            });
+        </script>
     </div>
 </body>
 </html>

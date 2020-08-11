@@ -46,6 +46,7 @@ namespace CourseShop.Web
 
             // Repositories
             services.AddTransient<ICourseRepository, CourseRepository>();
+            services.AddTransient<ICourseTagRepository, CourseTagRepository>();
 
             // Services
             services.AddTransient<ICourseService, CourseService>();

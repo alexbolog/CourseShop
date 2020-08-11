@@ -25,5 +25,11 @@
     <ProjectReference Include="..\CourseShop.Core.DAL\CourseShop.Core.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\course1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

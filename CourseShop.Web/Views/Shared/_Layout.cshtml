@@ -19,7 +19,10 @@
             {
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
-                        <form id="logout-form" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                        @*<form id="logout-form" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+            <a href="javascript:;" onclick="document.getElementById('logout-form').submit();">Logout</a>
+        </form>*@
+                        <form id="logout-form" class="form-inline" action="/Account/Logout" method="post">
                             <a href="javascript:;" onclick="document.getElementById('logout-form').submit();">Logout</a>
                         </form>
                     </li>
@@ -31,7 +34,7 @@
             else
             {
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/Identity/Account/Login">Login</a></li>
+                    <li><a href="/Account/Login">Login</a></li>
                 </ul>
             }
             <ul id="nav-mobile" class="right hide-on-med-and-down">

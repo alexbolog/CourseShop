@@ -89,9 +89,14 @@ namespace CourseShop.Web
                 template: "{controller=Home}/{action=Index}/{id?}"
                 );
             routes.MapAreaRoute(
-                name: "AreaRoute",
+                name: "HomeRoute",
                 areaName: "Home",
                 template: "{controller=Home}/{action=Index}/{id?}"
+                );
+            routes.MapAreaRoute(
+                name: "AccountRoute",
+                areaName: "Account",
+                template: "{controller=Account}/{action=Login}/{id?}"
                 );
             });
         }

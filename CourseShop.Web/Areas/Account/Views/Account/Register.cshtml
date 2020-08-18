@@ -1,0 +1,71 @@
+﻿@model CourseShop.Core.Business.ViewModels.RegisterAccountViewModel
+
+    <form id="register-form" class="form-inline" action="Register" method="post">
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Email" type="text" id="email-input" name="Email">
+                <label for="email-input">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Username" type="text" id="username-input" name="UserName">
+                <label for="username-input">Username</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Password" type="password" id="pwd-input" name="Password">
+                <label for="pwd-input">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="First name" type="text" id="firstname-input" name="FirstName">
+                <label for="firstname-input">First name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Last name" type="text" id="lastname-input" name="LastName">
+                <label for="lastname-input">Last name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Address" type="text" id="address-input" name="Address">
+                <label for="address-input">Address</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 offset-s3">
+                <input placeholder="Date of birth" type="text" id="dob-input" name="DateOfBirth" class="datepicker">
+                <label for="dob-input">Date of birth</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s3 offset-s6">
+                <a class="waves-effect waves-light btn" href="javascript:;" onclick="document.getElementById('register-form').submit();">Register</a>
+            </div>
+        </div>
+
+        @foreach (var errorMessage in Model.ErrorMessages)
+        {
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <span class="red-text">
+                        @errorMessage
+                    </span>
+                </div>
+            </div>
+        }
+
+    </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker').datepicker();
+    });
+</script>

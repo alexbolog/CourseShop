@@ -29,8 +29,8 @@ namespace CourseShop.Web.Areas.Home.Controllers
         public IActionResult Search(string tags) // tag1|tag2|tag3
         {
             var splittedTags = tags.Split('|', System.StringSplitOptions.RemoveEmptyEntries);
-            var courses = _courseService.GetCoursesByTags(splittedTags);
-            return View(new CourseIndexViewModel { Courses = courses });
+            
+            return View(new CourseIndexViewModel());
         }
     }
 }

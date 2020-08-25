@@ -9,13 +9,10 @@ namespace CourseShop.Core.Business.ViewModels
     {
         public CourseViewModel(Course course)
         {
-            this.Id = course.Id;
-            this.Name = course.Name;
-            this.Description = course.Description;
+            this.CourseId = course.CourseId;
+            this.Title = course.Title;
+            this.ShortDescription = course.ShortDescription;
             this.Price = course.Price;
-            this.ThumbnailPath = course.ThumbnailPath;
-            this.Contributors = course.Contributors;
-            this.ActualLength = TimeSpan.FromHours(course.LengthHours);
         }
 
         public TimeSpan ActualLength { get; set; }

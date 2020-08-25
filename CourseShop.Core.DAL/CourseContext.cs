@@ -16,11 +16,22 @@ namespace CourseShop.Core.DAL
         }
 
         public DbSet<Course> Courses { get; set; }
-        public DbSet<CourseTag> CourseTags { get; set; }
+        public DbSet<Contributor> Contributors { get; set; }
+        public DbSet<CourseContributor> CourseContributors { get; set; }
+        public DbSet<CourseCategory> CourseCategories { get; set; }
+        public DbSet<CourseInCategory> CoursesInCategories { get; set; }
+        public DbSet<CoursePromotion> CoursePromotions { get; set; }
+        public DbSet<CourseReview> CourseReviews { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>(e => e.Property(ep => ep.Price).HasColumnType("DECIMAL(5,2)"));
-            modelBuilder.Entity<Course>(e => e.Property(ep => ep.LengthHours).HasColumnType("DECIMAL(5,2)"));
+            modelBuilder.Entity<CoursePromotion>(e => e.Property(ep => ep.PromotionalPrice).HasColumnType("DECIMAL(5,2)"));
+            modelBuilder.Entity<CourseReview>(e => e.Property(ep => ep.Rating).HasColumnType("DECIMAL(5,2)"));
+
+            modelBuilder.Entity<CourseContributor>().HasKey(o => new { o.CourseId, o.CourseContributorId });
+            modelBuilder.Entity<CourseInCategory>().HasKey(o => new { o.CourseId, o.CourseCategoryId });
+
             base.OnModelCreating(modelBuilder);
         }
     }

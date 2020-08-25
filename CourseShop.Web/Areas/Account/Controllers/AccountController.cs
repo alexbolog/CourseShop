@@ -25,7 +25,7 @@ namespace CourseShop.Web.Areas.Account.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AppLoginViewModel viewModel)
+        public async Task<IActionResult> Login(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace CourseShop.Web.Areas.Account.Controllers
                 return RedirectToAction("Index");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, viewModel.Password, false, false);
             if(result.Succeeded)
             {
                 return RedirectToAction("Index", "Home", new { area = "Home" });
@@ -70,5 +70,7 @@ namespace CourseShop.Web.Areas.Account.Controllers
             newModel.ErrorMessages = result.Errors.Select(e => e.Description);
             return View(newModel);
         }
+
+
     }
 }

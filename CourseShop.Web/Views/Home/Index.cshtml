@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@foreach(var courseGroup in ViewBag.GroupedCourses)
+{
+    <div class="row">
+        @*@for (var courseIdx = 0; courseIdx < courseGroup.Length; courseIdx++)
+        {
+            <div class="col-lg-@(courseIdx * (12 / courseGroup.Length))">
+                @courseGroup[courseIdx].Title
+            </div>
+        }*@
+        @foreach(var course in courseGroup)
+        {
+        <div class="col-lg-@ViewBag.GridColumnSize">
+            @course.Title
+        </div>
+        }
+    </div>
+}

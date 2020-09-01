@@ -22,7 +22,8 @@ namespace CourseShop.Core.DAL
         public DbSet<CourseInCategory> CoursesInCategories { get; set; }
         public DbSet<CoursePromotion> CoursePromotions { get; set; }
         public DbSet<CourseReview> CourseReviews { get; set; }
-        
+        public DbSet<CourseImage> CourseImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>(e => e.Property(ep => ep.Price).HasColumnType("DECIMAL(5,2)"));
@@ -31,6 +32,8 @@ namespace CourseShop.Core.DAL
 
             modelBuilder.Entity<CourseContributor>().HasKey(o => new { o.CourseId, o.CourseContributorId });
             modelBuilder.Entity<CourseInCategory>().HasKey(o => new { o.CourseId, o.CourseCategoryId });
+
+            modelBuilder.Entity<CourseImage>().HasKey(o => new { o.CourseId, o.ImageIndex });
 
             base.OnModelCreating(modelBuilder);
         }

@@ -47,10 +47,12 @@ namespace CourseShop.Web
             // Repositories
             services.AddTransient<ICourseRepository, CourseRepository>();
             services.AddTransient<ICourseCategoryRepository, CourseCategoryRepository>();
+            services.AddTransient<ICourseImageRepository, CourseImageRepository>();
 
             // Services
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<ICourseCategoryService, CourseCategoryService>();
+            services.AddTransient<ICourseImageService, CourseImageService>();
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false)

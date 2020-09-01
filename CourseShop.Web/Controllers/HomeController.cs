@@ -9,31 +9,26 @@ using Microsoft.Extensions.Configuration;
 
 namespace CourseShop.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ICourseService courseService;
-        private readonly ICourseCategoryService courseCategoryService;
         private readonly IConfiguration configuration;
 
         public HomeController(
-            ICourseService courseService, 
-            ICourseCategoryService courseCategoryService,
-            IConfiguration configuration)
+            IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            this.courseService = courseService;
-            this.courseCategoryService = courseCategoryService;
-            this.configuration = configuration;
+            this.courseService = (ICourseService)serviceProvider.GetService(typeof(ICourseService));
+            this.configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
         }
 
         public async Task<IActionResult> Index()
         {
-            var allCourses = await courseService.GetAllCoursesAsync();
+            var allCourses = (await courseService.GetAllFullCoursesAsync()).ToList();
             var groupSize = configuration.GetValue<int>("HomePage:ItemGroupSize");
-            var courseCategories = await courseCategoryService.GetAllCourseCategoriesAsync();
 
             ViewBag.GroupedCourses = GetGroupedCourses(allCourses, groupSize);
             ViewBag.GridColumnSize = 12 / groupSize;
-            ViewBag.CourseCategories = courseCategories;
+
             return View();
         }
 

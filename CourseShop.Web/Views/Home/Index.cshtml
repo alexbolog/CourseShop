@@ -5,20 +5,21 @@
 }
 
 
-@foreach(var courseGroup in ViewBag.GroupedCourses)
+@foreach (var courseGroup in ViewBag.GroupedCourses)
 {
     <div class="row">
-        @*@for (var courseIdx = 0; courseIdx < courseGroup.Length; courseIdx++)
+        @foreach (var course in courseGroup)
         {
-            <div class="col-lg-@(courseIdx * (12 / courseGroup.Length))">
-                @courseGroup[courseIdx].Title
+            <div class="col-lg-@ViewBag.GridColumnSize">
+                <a class="text-decoration-none" asp-controller="Course" asp-action="Index" asp-route-id="@course.CourseId">
+                    <div class="card">
+                        <img src="data:image/jpg;base64,@course.Base64Images[0]" class="card-img-top" />
+                        <div class="card-body">
+                            <div class="card-title">@course.Title</div>
+                        </div>
+                    </div>
+                </a>
             </div>
-        }*@
-        @foreach(var course in courseGroup)
-        {
-        <div class="col-lg-@ViewBag.GridColumnSize">
-            @course.Title
-        </div>
         }
     </div>
 }

@@ -59,7 +59,6 @@ namespace CourseShop.Web.Controllers
 
             var appUser = GetApplicationUserForRegister(accountViewModel);
             var registrationResult = await userManager.CreateAsync(appUser, accountViewModel.Password);
-            ViewBag.IsRegistrationSuccessful = registrationResult.Succeeded;
             if (!registrationResult.Succeeded)
             {
                 return RedirectToAction("Index");

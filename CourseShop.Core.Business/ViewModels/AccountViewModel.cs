@@ -8,6 +8,6 @@ namespace CourseShop.Core.Business.ViewModels
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool IsPersistent { get; set; } // remember me
+        //public bool IsPersistent { get; set; } // remember me
     }
 }

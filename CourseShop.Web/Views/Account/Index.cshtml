@@ -4,14 +4,22 @@
 <head>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+
 </head>
 <body>
+    <a class="text-decoration-none" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left fa-10x"></i> Back</a>
     <div class="container">
+
+        <br /><br />
         <div class="col-lg-6 offset-lg-3">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -27,26 +35,72 @@
                     <br />
                     <form method="post" asp-controller="Account" asp-action="Login">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Email">
+                            <label for="inputLoginEmail">Email address</label>
+                            <input type="email" class="form-control" id="inputLoginEmail" aria-describedby="emailHelp" name="Email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="Password">
+                            <label for="inputLoginPassword">Password</label>
+                            <input type="password" class="form-control" id="inputLoginPwd" name="Password">
                         </div>
                         <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="IsPersistent">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            <input type="checkbox" class="form-check-input" id="checkBoxRememberMe" name="IsPersistent">
+                            <label class="form-check-label" for="checkBoxRememberMe">Check me out</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 @* Registration form *@
                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-
+                    <br />
+                    <form method="post" asp-controller="Account" asp-action="Register">
+                        <div class="form-row">
+                            <div class="form-group col-lg-6">
+                                <label for="inputFirstName">First name</label>
+                                <input type="text" class="form-control" id="inputFirstName" name="FirstName" required>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="inputLastName">Last name</label>
+                                <input type="text" class="form-control" id="inputLastName" name="LastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRegisterEmail">Email address</label>
+                            <input type="email" class="form-control" id="inputRegisterEmail" aria-describedby="emailHelp" name="Email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRegisterPassword">Password</label>
+                            <input type="password" class="form-control" id="inputRegisterPassword" name="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRegisterRepeatPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="inputRegisterRepeatPassword">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxTermsAndConditions" required>
+                                <label class="form-check-label" for="checkboxTermsAndConditions">
+                                    Agree to terms and conditions
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </form>
                 </div>
             </div>
+            @if (ViewBag.IsRegistrationSuccessful)
+            {
+                <div class="row">
+                    <div class="col-sm-10 offset-1">
+                        <div class="card">
+                            <div class="card-body text-success mx-auto">
+                                Registration successful! You can now login!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </body>

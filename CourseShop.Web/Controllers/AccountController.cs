@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CourseShop.Core.Business.ViewModels;
 using CourseShop.Core.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -19,8 +16,9 @@ namespace CourseShop.Web.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(bool registrationSuccessful = false)
         {
+            ViewBag.IsRegistrationSuccessful = registrationSuccessful;
             return View();
         }
 
@@ -49,6 +47,36 @@ namespace CourseShop.Web.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(AccountViewModel accountViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var appUser = GetApplicationUserForRegister(accountViewModel);
+            var registrationResult = await userManager.CreateAsync(appUser, accountViewModel.Password);
+            ViewBag.IsRegistrationSuccessful = registrationResult.Succeeded;
+            if (!registrationResult.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index", new { registrationSuccessful = true });
+        }
+
+        private ApplicationUser GetApplicationUserForRegister(AccountViewModel accountViewModel)
+        {
+            return new ApplicationUser
+            {
+                UserName = accountViewModel.Email.Split('@')[0],
+                Email = accountViewModel.Email,
+                FirstName = accountViewModel.FirstName,
+                LastName = accountViewModel.LastName
+            };
         }
     }
 }

@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Core.Entities", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{995AAF46-13D5-4A37-8CDF-39CB71354F67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Admin.Web", "CourseShop.Admin.Web\CourseShop.Admin.Web.csproj", "{D2C6F054-3210-49AF-9BA5-E8964CE98C23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Admin.Web", "CourseShop.Admin.Web\CourseShop.Admin.Web.csproj", "{D2C6F054-3210-49AF-9BA5-E8964CE98C23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Admin.Core.Entities", "CourseShop.Admin.Core.Entities\CourseShop.Admin.Core.Entities.csproj", "{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Admin.Core.Entities", "CourseShop.Admin.Core.Entities\CourseShop.Admin.Core.Entities.csproj", "{5EDEF978-4B7D-42B8-A4AF-C58D37F6C123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

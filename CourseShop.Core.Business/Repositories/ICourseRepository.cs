@@ -13,5 +13,6 @@ namespace CourseShop.Core.Business.Repositories
         void AddOrEditCourse(Course entity);
         void RemoveCourse(Course entity);
         Task<IEnumerable<Course>> GetAllCoursesAsync();
+        Task<Course> GetCourseByIdAsync(int courseId);
     }
 }

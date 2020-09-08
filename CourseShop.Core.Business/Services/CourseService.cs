@@ -13,69 +13,87 @@ namespace CourseShop.Core.Business.Services
     {
         Task<IEnumerable<Course>> GetAllCoursesAsync();
         Task<IEnumerable<CourseViewModel>> GetAllFullCoursesAsync();
+        Task<CourseViewModel> GetFullCourseByIdAsync(int courseId);
         IEnumerable<Course> GetAllCourses();
         void AddOrUpdateCourse(Course course);
         Course GetCourseById(int courseId);
+        Task<Course> GetCourseByIdAsync(int courseId);
         void RemoveById(int id);
         IEnumerable<Course> GetCarouselCourses();
     }
 
     public class CourseService : ICourseService
     {
-        private readonly ICourseRepository _courseRepository;
+        private readonly ICourseRepository courseRepository;
         private readonly ICourseImageService courseImageService;
+        private readonly ICourseContributorsRepository courseContributorsRepository;
 
-        public CourseService(ICourseRepository courseRepository, ICourseImageService courseImageService)
+        public CourseService(ICourseRepository courseRepository, ICourseImageService courseImageService, ICourseContributorsRepository courseContributorsRepository)
         {
-            this._courseRepository = courseRepository;
+            this.courseRepository = courseRepository;
             this.courseImageService = courseImageService;
+            this.courseContributorsRepository = courseContributorsRepository;
         }
 
         public void AddOrUpdateCourse(Course course)
         {
-            this._courseRepository.AddOrEditCourse(course);
+            this.courseRepository.AddOrEditCourse(course);
         }
 
         public IEnumerable<Course> GetAllCourses()
         {
-            return _courseRepository.GetAllCourses();
+            return courseRepository.GetAllCourses();
         }
 
         public Course GetCourseById(int courseId)
         {
-            return _courseRepository.GetCourseById(courseId);
+            return courseRepository.GetCourseById(courseId);
         }
 
         public void RemoveById(int id)
         {
             var course = GetCourseById(id);
-            _courseRepository.RemoveCourse(course);
+            courseRepository.RemoveCourse(course);
         }
 
         public IEnumerable<Course> GetCarouselCourses()
         {
-            var courses = _courseRepository.GetAllCourses();
+            var courses = courseRepository.GetAllCourses();
             return courses.Where(c => true);
         }
 
         public async Task<IEnumerable<Course>> GetAllCoursesAsync()
         {
-            return await _courseRepository.GetAllCoursesAsync();
+            return await courseRepository.GetAllCoursesAsync();
         }
 
         public async Task<IEnumerable<CourseViewModel>> GetAllFullCoursesAsync()
         {
-            var dbCourses = await _courseRepository.GetAllCoursesAsync();
+            var dbCourses = await courseRepository.GetAllCoursesAsync();
             var courses = dbCourses.Select(c => new CourseViewModel(c)).ToList();
-            //var courses =  dbCourses.Select(async c =>
-            //    new CourseViewModel(c, (await courseImageService.GetCourseImagesAsync(c.CourseId)).Select(img => img.Base64Image)));
+            
             foreach (var course in courses)
             {
                 var dbImages = (await courseImageService.GetCourseImagesAsync(course.CourseId)).ToList();
+                var contributors = await courseContributorsRepository.GetContributorsForCourseAsync(course.CourseId);
                 course.Base64Images = dbImages.Select(img => img.Base64Image).ToList();
+                course.Contributors = contributors.ToList();
             }
 
             return courses;
+        }
+
+        public async Task<Course> GetCourseByIdAsync(int courseId)
+        {
+            return await courseRepository.GetCourseByIdAsync(courseId);
+        }
+
+        public async Task<CourseViewModel> GetFullCourseByIdAsync(int courseId)
+        {
+            var dbCourse = await courseRepository.GetCourseByIdAsync(courseId);
+            var dbImages = await courseImageService.GetCourseImagesAsync(courseId);
+            var contributors = await courseContributorsRepository.GetContributorsForCourseAsync(courseId);
+            return new CourseViewModel(dbCourse, dbImages.Select(img => img.Base64Image), contributors);
         }
     }
 }

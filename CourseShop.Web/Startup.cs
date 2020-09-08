@@ -7,6 +7,7 @@ using CourseShop.Core.Business.Services;
 using CourseShop.Core.DAL;
 using CourseShop.Core.DAL.Repositories;
 using CourseShop.Core.Entities;
+using CourseShop.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,26 +45,12 @@ namespace CourseShop.Web
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
 
-            // Repositories
-            services.AddTransient<ICourseRepository, CourseRepository>();
-            services.AddTransient<ICourseCategoryRepository, CourseCategoryRepository>();
-            services.AddTransient<ICourseImageRepository, CourseImageRepository>();
-
-            // Services
-            services.AddTransient<ICourseService, CourseService>();
-            services.AddTransient<ICourseCategoryService, CourseCategoryService>();
-            services.AddTransient<ICourseImageService, CourseImageService>();
+            services.RegisterAppServices();
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Latest);
-
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.LoginPath = $"/Identity/Account/Login";
-            //    options.LogoutPath = $"/Identity/Account/Logout";
-            //    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-            //});
+                .SetCompatibilityVersion(CompatibilityVersion.Latest)
+                .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,23 +69,6 @@ namespace CourseShop.Web
             app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
-
-            //app.UseMvc(routes => {
-            //routes.MapRoute(
-            //    name: "default",
-            //    template: "{controller=Home}/{action=Index}/{id?}"
-            //    );
-            //routes.MapAreaRoute(
-            //    name: "HomeRoute",
-            //    areaName: "Home",
-            //    template: "{controller=Home}/{action=Index}/{id?}"
-            //    );
-            //routes.MapAreaRoute(
-            //    name: "AccountRoute",
-            //    areaName: "Account",
-            //    template: "{controller=Account}/{action=Login}/{id?}"
-            //    );
-            //});
         }
     }
 }

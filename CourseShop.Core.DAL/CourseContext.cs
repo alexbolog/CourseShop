@@ -23,6 +23,7 @@ namespace CourseShop.Core.DAL
         public DbSet<CoursePromotion> CoursePromotions { get; set; }
         public DbSet<CourseReview> CourseReviews { get; set; }
         public DbSet<CourseImage> CourseImages { get; set; }
+        public DbSet<AppCourseList> AppLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +35,9 @@ namespace CourseShop.Core.DAL
             modelBuilder.Entity<CourseInCategory>().HasKey(o => new { o.CourseId, o.CourseCategoryId });
 
             modelBuilder.Entity<CourseImage>().HasKey(o => new { o.CourseId, o.ImageIndex });
+
+            modelBuilder.Entity<AppCourseList>().HasKey(o => new { o.CourseId, o.ApplicationUserId, o.CourseListTypeId });
+            modelBuilder.Entity<AppCourseList>().Ignore(o => o.CourseListType);
 
             base.OnModelCreating(modelBuilder);
         }

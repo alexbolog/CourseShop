@@ -48,6 +48,11 @@ namespace CourseShop.Core.DAL.Repositories
             return _courseContext.Courses.FirstOrDefault(c => c.CourseId == id);
         }
 
+        public async Task<Course> GetCourseByIdAsync(int courseId)
+        {
+            return await _courseContext.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
+        }
+
         public void RemoveCourse(Course entity)
         {
             _courseContext.Remove(entity);

@@ -1,7 +1,74 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CourseShop.Core.Business.ViewModels.CourseViewModel
 
-This is course page for course with id: @ViewBag.CourseId
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div id="courseImgCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var imageBase64 in Model.Base64Images)
+                {
+                    <div class="carousel-item active">
+                        <img src="data:image/jpg;base64,@imageBase64" class="d-block w-100">
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#courseImgCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#courseImgCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!ViewBag.IsInShoppingCart)
+            {
+                <a class="btn btn-primary btn-md bg-success" asp-controller="Course" asp-action="AddToCart" asp-route-id="@Model.CourseId">Add to cart</a>
+            }
+            else
+            {
+                <a class="btn btn-primary btn-md bg-warning" asp-controller="Course" asp-action="RemoveFromCart" asp-route-id="@Model.CourseId">Remove from cart</a>
+            }
+            if (!ViewBag.IsInWishList)
+            {
+                <a class="btn btn-secondary btn-md bg-info" asp-controller="Course" asp-action="AddToWishList" asp-route-id="@Model.CourseId">Add to wishlist</a>
+            }
+            else
+            {
+                <a class="btn btn-secondary btn-md bg-warning" asp-controller="Course" asp-action="RemoveFromWishList" asp-route-id="@Model.CourseId">Remove from wishlist</a>
+            }
+            <br /><br />
+        }
+        <h2>Price: @Model.Price &euro;</h2>
+        <h3>About this course</h3><br />
+        <span>@Model.ShortDescription</span><br /><br />
+        <span>
+            <b>Contributors:</b>
+        </span>
+        @if (Model.Contributors.Any())
+        {
+            <ul>
+                @foreach (var contributor in Model.Contributors)
+                {
+                    <li>
+                        <a asp-controller="Contributor" asp-action="Index" asp-route-id="@contributor.ContributorId">@contributor.FirstName @contributor.LastName</a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span>Not available</span>
+        }
+
+    </div>
+</div>

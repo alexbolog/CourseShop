@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CourseShop.Core.Business.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +22,8 @@ namespace CourseShop.Web.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var courseCategoryService = (ICourseCategoryService)serviceProvider.GetService(typeof(ICourseCategoryService));
-
             var courseCategories = courseCategoryService.GetAllCourseCategoriesAsync().Result;
+
             ViewBag.CourseCategories = courseCategories;
             base.OnActionExecuting(context);
         }

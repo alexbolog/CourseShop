@@ -14,5 +14,6 @@ namespace CourseShop.Core.Business.Repositories
         void RemoveCourse(Course entity);
         Task<IEnumerable<Course>> GetAllCoursesAsync();
         Task<Course> GetCourseByIdAsync(int courseId);
+        Task<List<Course>> GetCoursesByOrderIdAsync(int orderId);
     }
 }

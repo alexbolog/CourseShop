@@ -4,14 +4,16 @@ using CourseShop.Core.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.Web.Migrations
 {
     [DbContext(typeof(CourseContext))]
-    partial class CourseContextModelSnapshot : ModelSnapshot
+    [Migration("20200919101536_AddedOrdersAndRelatedTables")]
+    partial class AddedOrdersAndRelatedTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,69 +281,6 @@ namespace CourseShop.Web.Migrations
                     b.HasKey("OrderId", "CourseId");
 
                     b.ToTable("CoursesInOrder");
-                });
-
-            modelBuilder.Entity("CourseShop.Core.Entities.FSM.FSMAction", b =>
-                {
-                    b.Property<int>("FSMActionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ActionTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FSMTransitionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FSMActionId");
-
-                    b.ToTable("FSMActions");
-                });
-
-            modelBuilder.Entity("CourseShop.Core.Entities.FSM.FSMCondition", b =>
-                {
-                    b.Property<int>("FSMConditionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConditionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ConditionTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FSMTransitionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FSMConditionId");
-
-                    b.ToTable("FSMConditions");
-                });
-
-            modelBuilder.Entity("CourseShop.Core.Entities.FSM.FSMTransition", b =>
-                {
-                    b.Property<int>("FSMTransitionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConditionSequence")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderStatusIdFrom")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderStatusIdTo")
-                        .HasColumnType("int");
-
-                    b.HasKey("FSMTransitionId");
-
-                    b.ToTable("FSMTransitions");
                 });
 
             modelBuilder.Entity("CourseShop.Core.Entities.Order", b =>

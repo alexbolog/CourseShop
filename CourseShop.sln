@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.Admin.Core.Entit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseShop.HelperApps.DataSeed", "CourseShop.HelperApps.DataSeed\CourseShop.HelperApps.DataSeed.csproj", "{29911E3F-2CBB-4CD6-9A2D-BBE506DE639B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseShop.Core.Business.FSM", "CourseShop.Core.Business.FSM\CourseShop.Core.Business.FSM.csproj", "{EB8D2516-D7D2-457F-80C6-2A52FC477931}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{29911E3F-2CBB-4CD6-9A2D-BBE506DE639B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29911E3F-2CBB-4CD6-9A2D-BBE506DE639B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29911E3F-2CBB-4CD6-9A2D-BBE506DE639B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB8D2516-D7D2-457F-80C6-2A52FC477931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8D2516-D7D2-457F-80C6-2A52FC477931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8D2516-D7D2-457F-80C6-2A52FC477931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8D2516-D7D2-457F-80C6-2A52FC477931}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

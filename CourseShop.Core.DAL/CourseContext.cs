@@ -1,4 +1,5 @@
 ﻿using CourseShop.Core.Entities;
+using CourseShop.Core.Entities.FSM;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,6 +25,12 @@ namespace CourseShop.Core.DAL
         public DbSet<CourseReview> CourseReviews { get; set; }
         public DbSet<CourseImage> CourseImages { get; set; }
         public DbSet<AppCourseList> AppLists { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<CoursesInOrder> CoursesInOrder { get; set; }
+
+        public DbSet<FSMTransition> FSMTransitions { get; set; }
+        public DbSet<FSMCondition> FSMConditions { get; set; }
+        public DbSet<FSMAction> FSMActions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +45,19 @@ namespace CourseShop.Core.DAL
 
             modelBuilder.Entity<AppCourseList>().HasKey(o => new { o.CourseId, o.ApplicationUserId, o.CourseListTypeId });
             modelBuilder.Entity<AppCourseList>().Ignore(o => o.CourseListType);
+
+            modelBuilder.Entity<Order>().HasKey(o => o.OrderId);
+            modelBuilder.Entity<Order>().Ignore(o => o.OrderStatus);
+            modelBuilder.Entity<Order>().Ignore(o => o.Courses);
+            modelBuilder.Entity<Order>(e => e.Property(ep => ep.TotalPrice).HasColumnType("DECIMAL(5,2)"));
+
+            modelBuilder.Entity<CoursesInOrder>().HasKey(o => new { o.OrderId, o.CourseId });
+
+            modelBuilder.Entity<FSMTransition>().Ignore(o => o.Actions);
+            modelBuilder.Entity<FSMTransition>().Ignore(o => o.Conditions);
+
+            modelBuilder.Entity<FSMCondition>().Ignore(o => o.ConditionType);
+            modelBuilder.Entity<FSMAction>().Ignore(o => o.ActionType);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CourseShop.Core.Business.Services;
+using CourseShop.Core.Entities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,17 +26,34 @@ namespace CourseShop.Web.Controllers
         public async Task<IActionResult> WishList()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ViewBag.IsShoppingList = false;
-            ViewBag.ListItems = (await appCourseListService.GetCoursesInListForApplicationUserAsync(Guid.Parse(userId), Core.Entities.Enums.CourseListType.WishList)).ToList();
-            return View("List");
+            return await GetListView(userId, CourseListType.WishList);
         }
 
         public async Task<IActionResult> ShoppingCart()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ViewBag.IsShoppingList = true;
-            ViewBag.ListItems = (await appCourseListService.GetCoursesInListForApplicationUserAsync(Guid.Parse(userId), Core.Entities.Enums.CourseListType.ShoppingCart)).ToList();
-            return View("List", new object());
+            return await GetListView(userId, CourseListType.ShoppingCart);
+        }
+
+        public async Task<IActionResult> RemoveFromWishList(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await appCourseListService.RemoveCourseFromWishListAsync(id, Guid.Parse(userId));
+            return await GetListView(userId, CourseListType.WishList);
+        }
+
+        public async Task<IActionResult> RemoveFromCart(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await appCourseListService.RemoveCourseFromShoppingCartAsync(id, Guid.Parse(userId));
+            return RedirectToAction("ShoppingCart");
+        }
+
+        private async Task<IActionResult> GetListView(string userId, CourseListType courseListType)
+        {
+            var listItems = (await appCourseListService.GetCoursesInListForApplicationUserAsync(Guid.Parse(userId), courseListType)).ToList();
+            ViewBag.IsShoppingList = courseListType == CourseListType.ShoppingCart;
+            return View("List", listItems);
         }
     }
 }

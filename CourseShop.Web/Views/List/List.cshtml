@@ -1,8 +1,63 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model List<CourseShop.Core.Entities.Course>
+@using System.Linq;
+
+@if (!Model.Any())
+{
+    <div class="col-sm-6 offset-sm-3">
+        <br />
+        <h3 class="text-secondary">Looks like your @(ViewBag.IsShoppingList ? "shopping " : "wish")list is empty..</h3>
+    </div>
 }
-
-
-This is @(ViewBag.IsShoppingList? "Shopping" : "Wish") list, and has @ViewBag.ListItems.Count items
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td scope="col"><a class="text-decoration-none" asp-controller="Course" asp-action="Index" asp-route-id="@Model[i].CourseId">@Model[i].Title</a></td>
+                    <td scope="col">@Model[i].Price &euro;</td>
+                    <td scope="col">
+                        @if (ViewBag.IsShoppingList)
+                        {
+                            <a asp-controller="List" asp-action="RemoveFromCart" asp-route-id="@Model[i].CourseId">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="List" asp-action="RemoveFromWishList" asp-route-id="@Model[i].CourseId">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">@Model.Count @(Model.Count > 1? "courses" : "course")</th>
+                <td scope="col"></td>
+                <td scope="col">@Model.Sum(c => c.Price) &euro;</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    @if (ViewBag.IsShoppingList && Model.Any())
+    {
+        <div class="row">
+            <div class="col-sm-3 offset-sm-9">
+                <a class="btn btn-primary btn-md bg-success" href="#">Proceed to checkout</a>
+            </div>
+        </div>
+    }
+}

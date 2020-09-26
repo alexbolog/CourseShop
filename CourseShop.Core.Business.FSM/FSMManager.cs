@@ -59,11 +59,13 @@ namespace CourseShop.Core.Business.FSM
 
         private async Task<bool> TryRunTransition(FSMTransition transition, Order order)
         {
+            
+            // (AccountConfirmed&ProcessedPayment)|c3 => 
             // TODO: enhance with ConditionSequence and fetch conditions based on ConditionName
             foreach (var conditionInfo in transition.Conditions)
             {
                 var condition = await fsmService.GetConditionByType(conditionInfo.ConditionType);
-                return await condition.Evaluate();
+                return condition.Evaluate();
             }
             return false;
         }

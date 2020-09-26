@@ -7,6 +7,6 @@ namespace CourseShop.Core.Business.FSM.Conditions
 {
     public abstract class FSMConditionBase
     {
-        public abstract Task<bool> Evaluate();
+        public abstract bool Evaluate();
     }
 }

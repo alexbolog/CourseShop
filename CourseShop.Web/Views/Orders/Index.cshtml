@@ -1,0 +1,26 @@
+﻿@model CourseShop.Core.Business.ViewModels.OrderHistoryViewModel
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order number</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Orders.Count(); i++)
+            {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td scope="col"><a class="text-decoration-none" href="#">@Model.Orders.ElementAt(i).OrderId</a></td>
+                <td scope="col">@Model.Orders.ElementAt(i).TotalPrice &euro;</td>
+                <td scope="col">@Model.Orders.ElementAt(i).OrderStatus.ToString()</td>
+                <td scope="col">@Model.Orders.ElementAt(i).InsertedDate.ToLongDateString()</td>
+            </tr>
+            }
+        </tbody>
+    </table>

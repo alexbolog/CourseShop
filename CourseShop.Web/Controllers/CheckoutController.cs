@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using CourseShop.Core.Business.FSM;
 using CourseShop.Core.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseShop.Web.Controllers
 {
+    [Authorize]
     public class CheckoutController : BaseController
     {
         private IOrderService orderService;

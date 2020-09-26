@@ -1,7 +1,6 @@
 ﻿using CourseShop.Core.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Threading.Tasks;
 
 namespace CourseShop.HelperApps.DataSeed
 {
@@ -11,7 +10,7 @@ namespace CourseShop.HelperApps.DataSeed
         private static SeedBase[] Seeders = new SeedBase[]
         {
             new SeedDefaultFSMData(),
-            //new SeedImageData()
+            new SeedImageData()
         };
 
         static void Main(string[] args)

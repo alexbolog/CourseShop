@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using CourseShop.Core.Business.Services;
 using CourseShop.Core.Business.ViewModels;
 using CourseShop.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,5 +80,6 @@ namespace CourseShop.Web.Controllers
                 LastName = accountViewModel.LastName
             };
         }
+
     }
 }

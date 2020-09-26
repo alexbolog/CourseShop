@@ -20,6 +20,7 @@ namespace CourseShop.Core.Business.Services
         Task<Course> GetCourseByIdAsync(int courseId);
         void RemoveById(int id);
         IEnumerable<Course> GetCarouselCourses();
+        Task<IEnumerable<CourseViewModel>> GetFullCoursesAsync(IEnumerable<Course> courses);
     }
 
     public class CourseService : ICourseService
@@ -94,6 +95,20 @@ namespace CourseShop.Core.Business.Services
             var dbImages = await courseImageService.GetCourseImagesAsync(courseId);
             var contributors = await courseContributorsRepository.GetContributorsForCourseAsync(courseId);
             return new CourseViewModel(dbCourse, dbImages.Select(img => img.Base64Image), contributors);
+        }
+
+        public async Task<IEnumerable<CourseViewModel>> GetFullCoursesAsync(IEnumerable<Course> courses)
+        {
+            var viewModels = courses.Select(c => new CourseViewModel(c)).ToList();
+            foreach (var course in viewModels)
+            {
+                var dbImages = (await courseImageService.GetCourseImagesAsync(course.CourseId)).ToList();
+                var contributors = await courseContributorsRepository.GetContributorsForCourseAsync(course.CourseId);
+                course.Base64Images = dbImages.Select(img => img.Base64Image).ToList();
+                course.Contributors = contributors.ToList();
+            }
+
+            return viewModels;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CourseShop.Core.DAL;
 using CourseShop.Core.Entities.Enums;
 using CourseShop.Core.Entities.FSM;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,12 @@ namespace CourseShop.HelperApps.DataSeed
                 Base64Image = base64,
                 ImageIndex = 0
             });
+
+            context.Database.OpenConnection();
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.CourseImages ON");
+            context.SaveChanges();
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.CourseImages OFF");
+            context.Database.CloseConnection();
         }
     }
 }

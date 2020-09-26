@@ -56,11 +56,37 @@ namespace CourseShop.Core.DAL.Repositories
             return orders;
         }
 
+        public async Task<IEnumerable<Order>> GetUsersOrdersAsync(string userId)
+        {
+            return await courseContext.Orders.Where(o => o.AppUserId == userId).ToListAsync();
+        }
+
         public async Task UpdateStatusAsync(int orderId, int orderStatusIdTo)
         {
             var dbOrder = await courseContext.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
             dbOrder.OrderStatusId = orderStatusIdTo;
             await courseContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetPurchasedCoursesAsync(string userId)
+        {
+            return await
+                courseContext.Courses
+                .Join(courseContext.CoursesInOrder, c => c.CourseId, m => m.CourseId, (course, map) => new { course, map.OrderId })
+                .Join(courseContext.Orders, o => o.OrderId, orders => orders.OrderId, (obj, o) => new { obj.course, order = o })
+                .Where(o => o.order.AppUserId == userId && o.order.OrderStatusId == (int)OrderStatus.Completed)
+                .Select(o => o.course)
+                .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<bool> IsCoursePurchasedAsync(int courseId, string userId)
+        {
+            return await
+                courseContext.Orders
+                .Where(o => o.AppUserId == userId && o.OrderStatusId == (int)OrderStatus.Completed)
+                .Join(courseContext.CoursesInOrder, o => o.OrderId, map => map.OrderId, (orders, map) => map)
+                .AnyAsync(m => m.CourseId == courseId);
         }
     }
 }

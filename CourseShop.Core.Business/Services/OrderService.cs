@@ -12,6 +12,8 @@ namespace CourseShop.Core.Business.Services
         Task AddNewOrderAsync(string userId, List<Course> courses);
         Task<IEnumerable<Order>> GetNotCompletedOrdersAsync();
         Task UpdateStatusAsync(int orderId, int orderStatusIdTo);
+        Task<IEnumerable<Order>> GetAllOrdersForUserAsync(string userId);
+        Task<IEnumerable<Course>> GetPurchasedCoursesAsync(string userId);
     }
 
     public class OrderService : IOrderService
@@ -28,6 +30,11 @@ namespace CourseShop.Core.Business.Services
             await orderRepository.AddNewOrder(userId, courses);
         }
 
+        public async Task<IEnumerable<Order>> GetAllOrdersForUserAsync(string userId)
+        {
+            return await orderRepository.GetUsersOrdersAsync(userId);
+        }
+
         public async Task<IEnumerable<Order>> GetNotCompletedOrdersAsync()
         {
             return await orderRepository.GetNotCompletedOrdersAsync();
@@ -36,6 +43,11 @@ namespace CourseShop.Core.Business.Services
         public async Task UpdateStatusAsync(int orderId, int orderStatusIdTo)
         {
             await orderRepository.UpdateStatusAsync(orderId, orderStatusIdTo);
+        }
+
+        public async Task<IEnumerable<Course>> GetPurchasedCoursesAsync(string userId)
+        {
+            return await orderRepository.GetPurchasedCoursesAsync(userId);
         }
     }
 }

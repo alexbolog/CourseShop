@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-sm-6">
-        @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated && !ViewBag.IsPurchased)
         {
             if (!ViewBag.IsInShoppingCart)
             {
@@ -46,8 +46,12 @@
             {
                 <a class="btn btn-secondary btn-md bg-warning" asp-controller="Course" asp-action="RemoveFromWishList" asp-route-id="@Model.CourseId">Remove from wishlist</a>
             }
-            <br /><br />
         }
+        else
+        {
+            <a href="#" class="btn btn-info">Watch course</a>
+        }
+        <br /><br />
         <h2>Price: @Model.Price &euro;</h2>
         <h3>About this course</h3><br />
         <span>@Model.ShortDescription</span><br /><br />

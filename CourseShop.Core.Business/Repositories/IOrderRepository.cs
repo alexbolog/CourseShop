@@ -11,5 +11,8 @@ namespace CourseShop.Core.Business.Repositories
         Task AddNewOrder(string userId, List<Course> courses);
         Task<IEnumerable<Order>> GetNotCompletedOrdersAsync();
         Task UpdateStatusAsync(int orderId, int orderStatusIdTo);
+        Task<IEnumerable<Order>> GetUsersOrdersAsync(string userId);
+        Task<IEnumerable<Course>> GetPurchasedCoursesAsync(string userId);
+        Task<bool> IsCoursePurchasedAsync(int courseId, string userId);
     }
 }

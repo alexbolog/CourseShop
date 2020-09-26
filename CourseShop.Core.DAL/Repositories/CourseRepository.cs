@@ -1,5 +1,6 @@
 ﻿using CourseShop.Core.Business.Repositories;
 using CourseShop.Core.Entities;
+using CourseShop.Core.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -29,6 +29,7 @@ namespace CourseShop.Web.Controllers
             {
                 ViewBag.IsInShoppingCart = await appCourseListService.IsInListAsync(id, userId, CourseListType.ShoppingCart);
                 ViewBag.IsInWishList = await appCourseListService.IsInListAsync(id, userId, CourseListType.WishList);
+                ViewBag.IsPurchased = await appCourseListService.IsPurchasedAsync(id, userId);
             }
             return View(course);
         }

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<CourseShop.Core.Business.ViewModels.CourseViewModel>
+There are @Model.Count() courses available
+
+<div class="row">
+    @foreach (var course in @Model)
+    {
+        <div class="col-lg-3">
+            <a class="text-decoration-none" asp-controller="Course" asp-action="Index" asp-route-id="@course.CourseId">
+                <div class="card">
+                    <img src="data:image/jpg;base64,@course.Base64Images[0]" class="card-img-top" />
+                    <div class="card-body">
+                        <div class="card-title">@course.Title</div>
+                        <div class="card-text"><a href="#" class="btn btn-info">Watch course</a></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

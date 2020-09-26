@@ -7,7 +7,7 @@ namespace CourseShop.Core.Business.FSM.Conditions
 {
     public class ProcessedPaymentCheck : FSMConditionBase
     {
-        public override async Task<bool> Evaluate()
+        public override bool Evaluate()
         {
             return true;
         }
